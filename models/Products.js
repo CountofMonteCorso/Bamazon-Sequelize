@@ -1,5 +1,3 @@
-//  Using "Procuct instad of products from last assignment.  may need to find/replace on this.
-
 // Product model field definition
 module.exports = function(connection, Sequelize) {
     const Products = connection.define('Products', {
