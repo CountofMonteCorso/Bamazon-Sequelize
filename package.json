@@ -1,0 +1,26 @@
+{
+  "name": "bamazon-sequelize",
+  "version": "1.0.0",
+  "description": "Bamazon App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Steve Miotti",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.42.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smiotti/Bamazon-Sequelize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/smiotti/Bamazon-Sequelize/issues"
+  },
+  "homepage": "https://github.com/smiotti/Bamazon-Sequelize#readme"
+}

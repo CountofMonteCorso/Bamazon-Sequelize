@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AngularJS - Bootstrap - NodeJS/Express - MongoDB</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="/static/js/controller.js"></script>
+</head>
+ 
+<body> 
+<div class="container" ng-app="app"> 
+<div class="col-sm-4">
+	<h3>NodeJS/Express - Post/Get</h3>
+	<div ng-controller="postController">
+		<div>		
+			<form name="userForm" ng-submit="submitUserForm()">
+			  <div class="form-group">
+				<label for="firstname">FirstName:</label>
+				<input ng-model="firstname" type="text" class="form-control" id="firstname" placeholder="Enter FirstName"/>
+			  </div>
+			  <div class="form-group">
+				<label for="lastname">LastName:</label>
+				<input ng-model="lastname" type="text" class="form-control" id="lastname" placeholder="Enter LastName"/>
+			  </div>
+			  <button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</div>
+		
+		<div>{{postMsg}}</div>
+		<div>{{postErrMsg}}</div>
+	</div>
+	<br>
+	<div ng-controller="getController">
+		<button ng-click="getAllUsers()" type="button" class="btn btn-default">Users</button>
+		<ul>
+			<li ng-repeat="usr in users">{{usr.id + ". " + usr.firstname + " " + usr.lastname}}</li>
+		</ul>
+		<div>{{getErrMsg}}</div>
+	</div>
+</div>	
+</div>
+</body>
+</html>

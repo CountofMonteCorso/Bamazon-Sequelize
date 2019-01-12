@@ -1,0 +1,12 @@
+
+/* Background styling for the Bootstrap Cards used in survey and employeList html files */
+.card {
+    font-size: 18px;
+    /* background-image: url("http://www.designbolts.com/wp-content/uploads/2012/12/Noise-lines-White-Tileable-pattern-for-website-background.jpg"); */
+  }
+
+  .card-header, .card-footer {
+    background-color: lightgray;
+  }
+
+
