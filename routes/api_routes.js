@@ -33,6 +33,29 @@ module.exports = function(app) {
     });
   });
 
+  
+
+
+  //  Something similar to this is needed to update the Product list with the new Quantity
+
+  //  // PUT route for updating Products
+  //  app.put('/api/products/:id', function(req, res) {
+  //   db.Products.update(
+  //     req.body,
+  //     {
+  //       where: {
+  //         id: req.params.id
+  //       }
+  //   }).then(function(dbArticle) {
+  //     res.json(dbArticle);
+  //   }).catch(function(error) {
+  //     res.json({ error: error });
+  //   });
+  // });
+
+
+
+  // don't need a post.
   // POST Request
   // Adds a new row to our table
   // Responds with success: true or false if successful
