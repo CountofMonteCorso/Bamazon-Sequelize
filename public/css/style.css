@@ -9,4 +9,8 @@
     background-color: lightgray;
   }
 
-
+  .title {
+    background-image: url("http://scriptstore.in/wp-content/uploads/2016/06/e-commerce-web-design-nz.png");
+    background-size: contain;
+  }
+  
