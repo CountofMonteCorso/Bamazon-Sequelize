@@ -26,13 +26,13 @@ Click the Shop button to begin your shopping experience.  Select a product name 
 
 
 The app will process your order if there is enough product inventory, and provide you with a total order cost, as well as update the remaining inventory.
-   
-   [Example: Order Process with availalbe inventory](Screen_caps/ProductOrder.GIF)
+<!--    
+   [Example: Order Process with availalbe inventory](Screen_caps/ProductOrder.GIF) -->
 
 
  If there is insufficient product inventory, customer will be notified that the order cannot be processed.  
    
-   [Example: Order Unable to Process. Insufficient inventory](Screen_caps/OutOfStock.GIF)
+   <!-- [Example: Order Unable to Process. Insufficient inventory](Screen_caps/OutOfStock.GIF) -->
 
 _______________________________________________________________________________________________________
 

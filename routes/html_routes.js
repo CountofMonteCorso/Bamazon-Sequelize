@@ -6,19 +6,11 @@ const path = require('path');
 
 
 // *** ROUTING ***
-// A GET Route to /survey which should display the survey page to the ueser.
 // A GET Route to /list which should display the Product List page to the ueser.
 // A default, catch-all route that leads to index.html which displays the home page to the user.
 
 module.exports = function(app) {
   
-  // // Setting up the route to serve up the Survey html file.
-  // app.get('/survey', function(req, res) {
-  //   res.sendFile(path.join(__dirname, '/../public/survey.html'));
-  //   // Used for testing...
-  //   // console.log(req.method);
-  //   // console.log(req.body);
-  // });
 
   // Setting up the route to serve up the product_list html file.
   app.get('/products', function(req, res) {
