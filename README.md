@@ -1,7 +1,7 @@
 # Bamazon-Sequelize
 ### Assignment #13 - Bamazon-Sequelize
 
-"Bamazon" is a very poor man's Amazon storefront using Node.js, Sequelize and MySQL.  The node app will display a list of available products and take customer orders from the command line.  Once the customer selects a product and quantity, the app will display total cost for the product(s) being ordered and then update the inventory. Product inventory is being stored in a MySQL database called `bamazon`.
+"Bamazon" is a very poor man's Amazon storefront using Node.js, Sequelize and MySQL.  This app, deployed on Heroku, will display a list of available products and take customer orders from the command line.  Once the customer selects a product and quantity, the app will display total cost for the product(s) being ordered and then update the inventory. Product inventory is being stored in a MySQL database called `bamazon`.
 
 Inside of the bamazon database there is a table called `products`, containing the following field definition...
 
