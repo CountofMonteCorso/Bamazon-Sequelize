@@ -55,6 +55,17 @@ module.exports = function(app) {
 
 
 
+
+//   app.put('/api/products/update', function(req, res) {
+//     db.Products.update(req.body.item_id, function(result) {
+//       // MySQL update log to console
+//       console.log(result);
+//       res.redirect('/');
+//   });
+// });
+
+
+
   // don't need a post.
   // POST Request
   // Adds a new row to our table
