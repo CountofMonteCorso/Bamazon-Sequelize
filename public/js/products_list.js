@@ -10,6 +10,7 @@ $(function() {
 
   const renderList = function (outputElement, dataList) {
     // Loop through and display each of the products
+
       for (let i = 0; i < dataList.length; i++) {
 
         // Get a reference to the product list element and populate with product data
@@ -32,35 +33,6 @@ $(function() {
       }  
   }
 
-
-
-
-  // tring to get the select dropdown populated (remove)
-  // const renderSelect = function (outputElement, dataList) {
-  //   // Loop through and display each of the product names in the dropdown box
-  //     for (let i = 0; i < dataList.length; i++) {
-
-  //       // Get a reference to the product list element and populate with product id and name
-  //       const output = $(outputElement);
-
-  //       // Then display the fields in HTML 
-  //       const productItem = $("<option>");
-   
-
-  //       listItem.append(
-  //         $("<option>").text(dataList[i].id),
-  //         $("<option>").text(dataList[i].product_name),
-       
-  //       );
-
-  //       output.append(productItem);
-  //     }  
-  // }
-
-
-
-
-
   
   const runListQuery = function () {
 
@@ -73,104 +45,50 @@ $(function() {
   }
 
 
-  // tring to get the select dropdown populated (remove)
-  // const runListQuery = function () {
-
-  //   // The AJAX function uses the URL of API to GET the associated data  
-  //   $.ajax({ url: "/api/products", method: "GET" })
-  //     .then(function(inputProductName) {
-  //       renderSelect('#inputProductName', inputProductName);
-  //     });
-  // }
-
-
-
-
   // Render data to the page
   render();
 });
 
 
-// **********************************************************
-// *** Need code for gathing user input from select boxes ***
-// ************************************************************
 
+// Gathing user input from select boxes
+const getData = function(event){
+  event.preventDefault();
 
-// const getArticles = function(){
-//   $.get('/api/articles')
-//   .then(function (data){
-//     console.log(data);
-//     render(data);
-//   })
-// }
-
-
-
-// const postArticle = function(event){
-//   event.preventDefault();
-
-//   // Save the input in an object called 'article'
-//   const article = {
-//     Product: $('#inputProductName').val().trim(),
-//     Quantity: $('#inputProductName').val().trim(),
-
-//   }
-
-//   // POST the article object to /api/articles
-//   $.post('/api/articles', article)
-//     .then(function(data) {
-
-//       // After receiving a response, call getArticles
-//       getArticles();
-
-//       // Blank our inputs after POST
-//       $('#article-title').val('');
-//       $('#article-body').val('');
-//     });
-
-// }
-
-// $('#submit').on('click', postArticle);
+  // Save the user input for 'Product ID', Product Name and 'Quantity' 
+  let Product = $('#inputProductId').find(':selected').data('id');
+  let ProductName = $('#inputProductId').val().trim();
+  let Quantity = $('#inputQuantity').val().trim();
+  
+  //log collected uer data
+  console.log(`Product Id: ${Product}`);
+  console.log(`Product Name: ${ProductName}`);
+  console.log(`Quantity: ${Quantity}`);
 
 
 
+// temprority call Model to show user data captured
+  const displayModal = function(data) {
+  
+  // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+  $('#product_name').text(`Prodcut Name: ${ProductName}`);
+  $('#order_quantity').text(`Order Quantity: ${Quantity}`);
 
-
-
-
-// The app prompts users with two messages.
-// The first asks for the ID of the product they would like to buy.
-// The second message asks how many units of the product they would like to buy.
-
-function promptUser(list) {
-  // console.log(list);
-  // inquirer promt docs - https://www.npmjs.com/package/inquirer
-
-  inquirer
-      .prompt([
-          {
-              name: "item_id",
-              type: "list",
-              message: "Select the product you like to purchase: ",
-              choices: list,
-          },
-          {
-              name: "quantity",
-              type: "input",
-              message: "Enter how many units you want to buy: ",
-              validate: function(value) {
-                  if (isNaN(value) === false) {
-                      return true;
-                  }
-                  return false;
-              },
-              filter: Number
-          }
-      ])
-      .then(function(answer) {
-          checkInventory(answer);
-      });
+  // Show the modal with the best match
+  $('#modal_response').modal('toggle');
 }
+
+  displayModal();
+
+
+//  call the inventory check passing the prod ID and Quantity
+
+// checkInventory(Product, Quantity);
+
+}
+
+
+$('#submit').on('click', getData);
 
 
 
@@ -180,13 +98,6 @@ function promptUser(list) {
 // *****************************************************************************************************
 
 
-
-// *******************************************
-// *** Need code for update user in modal  ***
-// *******************************************
-
-
-
 // // Once the customer has placed the order, application checks if there is enough of the product in inventory to meet the customer's request.
 // // If not, the app notifies the customer, and then prevents the order from going through.
 // // However, if store does have enough of the product, the customer's order is fulfilled.
@@ -194,7 +105,7 @@ function promptUser(list) {
 // function checkInventory(order) {
 //   var query = "SELECT * FROM products WHERE ?";
 //   connection.query(query, { item_id: order.item_id }, function(err, res) {
-//       //console.log(res);
+//       console.log(res);
 //       if (err) throw err;
 //       //
 //       // Check if there is enough in stock and notify customer if there is insufficient inventory.
@@ -241,3 +152,9 @@ function promptUser(list) {
 //                       getInventory();
 //                   });
 // }
+
+
+// *******************************************
+// *** Need code for finall update in modal  ***
+// *******************************************
+
