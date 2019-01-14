@@ -83,7 +83,7 @@ const getData = function(event){
   console.log(`Product Id: ${Product}`);
   console.log(`Product Name: ${ProductName}`);
   console.log(`Quantity: ${Quantity}`);
-  console.log(`Product: ${productList}`);
+  // console.log(`Product: ${productList}`);
 
 
 // Validating user input field values.  A Product must be chosen, and a valid number greater than 0 is required.
@@ -99,7 +99,7 @@ if (isValid === true){
   
   const displayModal = function(data) {
     
-    // Grab the result from the AJAX post so the Product Name and Quantity are displayed.
+    // Grab the order results for Product Name and Quantity and display them.
     $('#product_name').text(`Prodcut Name: ${ProductName}`);
     $('#order_quantity').text(`Order Quantity: ${Quantity}`);
 
@@ -108,6 +108,9 @@ if (isValid === true){
   }
 
   displayModal();
+  $('#inputProductId').val('Choose...');
+  $('#inputQuantity').val('');
+
 
   
   } else {
@@ -115,6 +118,7 @@ if (isValid === true){
     alert(`You have not chosen a Product or have entered an invalid Quantity!  Please correct and then click the "Add to Cart" button.`)
   }
 }
+
 
 
 $('#submit').on('click', getData);

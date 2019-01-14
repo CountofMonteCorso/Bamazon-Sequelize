@@ -15,25 +15,39 @@ const db = require('../models');
 // ROUTING
 // ===============================================================================
 
-module.exports = function(app) {
+module.exports = function (app) {
 
   // API Requests for /api/products
   // Below code controls what happens when a request is made to /api/products
 
   // GET Request
   // Responds with all the current product infromation
-  app.get('/api/products', function(req, res) {
-    db.Products.findAll({}).then(function(rows) {
+  app.get('/api/products', function (req, res) {
+    db.Products.findAll({}).then(function (rows) {
       // sending back to the paroduct data to the front end
       res.json(rows);
       console.log(req.method + " request");
       console.log(JSON.stringify(rows))
-    }).catch(function(error) {
+    }).catch(function (error) {
       res.json({ error: error });
     });
   });
 
-  
+
+  // Get route for retrieving a single Product
+  // app.get('/api/products/:id', function (req, res) {
+  //   // Here we add an 'include' property to our options in our findOne query
+  //   db.Products.findOne({
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   }).then(function (dbProduct) {
+  //     res.json(dbProduct);
+  //   }).catch(function (error) {
+  //     res.json({ error: error });
+  //   });
+  // });
+
 
 
   //  Something similar to this is needed to update the Product list with the new Quantity
@@ -53,16 +67,16 @@ module.exports = function(app) {
   //   });
   // });
 
- // ... or like below...
+  // ... or like below...
 
 
-//   app.put('/api/products/update', function(req, res) {
-//     db.Products.update(req.body.item_id, function(result) {
-//       // MySQL update log to console
-//       console.log(result);
-//       res.redirect('/');
-//   });
-// });
+  //   app.put('/api/products/update', function(req, res) {
+  //     db.Products.update(req.body.item_id, function(result) {
+  //       // MySQL update log to console
+  //       console.log(result);
+  //       res.redirect('/');
+  //   });
+  // });
 
 
 
