@@ -65,7 +65,8 @@ const getData = function(event){
   console.log(`Product Name: ${ProductName}`);
   console.log(`Quantity: ${Quantity}`);
 
-// Validating user input field values
+
+// Validating user input field values.  A Product must be chosen, and a valid number greater than 0 is required.
   let isValid = true;
 if (Quantity === parseInt(Quantity, 10) && Quantity > 0 && Product === parseInt(Product, 10))
   isValid = true;
