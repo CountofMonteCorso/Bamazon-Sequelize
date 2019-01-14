@@ -55,36 +55,43 @@ $(function() {
 const getData = function(event){
   event.preventDefault();
 
-  // Save the user input for 'Product ID', Product Name and 'Quantity' 
+  // Save the user input for 'Product ID', 'Product Name' and 'Quantity' 
   let Product = $('#inputProductId').find(':selected').data('id');
   let ProductName = $('#inputProductId').val().trim();
-  let Quantity = $('#inputQuantity').val().trim();
-  
+  let Quantity = parseInt($('#inputQuantity').val().trim());
+
   //log collected uer data
   console.log(`Product Id: ${Product}`);
   console.log(`Product Name: ${ProductName}`);
   console.log(`Quantity: ${Quantity}`);
 
+// Validating user input field values
+  let isValid = true;
+if (Quantity === parseInt(Quantity, 10))
+  isValid = true;
+else
+  isValid = false;
 
 
-// temprority call Model to show user data captured
+if (isValid === true){  
+  // temprority call Model to show user data captured
   const displayModal = function(data) {
-  
-  // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-  $('#product_name').text(`Prodcut Name: ${ProductName}`);
-  $('#order_quantity').text(`Order Quantity: ${Quantity}`);
+    
+    // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+    $('#product_name').text(`Prodcut Name: ${ProductName}`);
+    $('#order_quantity').text(`Order Quantity: ${Quantity}`);
 
-  // Show the modal with the best match
-  $('#modal_response').modal('toggle');
-}
+    // Show the modal with the best match
+    $('#modal_response').modal('toggle');
+  }
 
   displayModal();
 
+  } else {
+    // Display an error alert if the form is not valid, and a correct needs to be made.
+    alert(`You have entered an invalid Quantity.  Please renter a valid number!`)
 
-//  call the inventory check passing the prod ID and Quantity
-
-// checkInventory(Product, Quantity);
-
+  }
 }
 
 
