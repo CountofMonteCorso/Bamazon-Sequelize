@@ -67,7 +67,8 @@ const getData = function(event){
 
 // Validating user input field values
   let isValid = true;
-if (Quantity === parseInt(Quantity, 10))
+if (Quantity === parseInt(Quantity, 10) && Product === parseInt(Product, 10))
+// if (Product === parseInt(Product, 10))
   isValid = true;
 else
   isValid = false;
@@ -89,7 +90,7 @@ if (isValid === true){
 
   } else {
     // Display an error alert if the form is not valid, and a correct needs to be made.
-    alert(`You have entered an invalid Quantity.  Please renter a valid number!`)
+    alert(`You have not chosen a Product or have entered an invalid Quantity!  Please correct and then click the "Add to Cart" button.`)
 
   }
 }
