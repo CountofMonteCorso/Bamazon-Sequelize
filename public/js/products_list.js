@@ -44,10 +44,29 @@ $(function() {
       });
   }
 
-
   // Render data to the page
   render();
 });
+
+
+
+
+//       const runListQuery = function () {
+
+//         // The AJAX function uses the URL of API to GET the associated data  
+//         $.ajax({ url: "/api/products", method: "GET" })
+//           .then(function(productList) {
+//             renderList('#productList', productList);
+//             // renderSelect('#inputProductName', inputProductName);
+//           });
+//       }
+    
+//   }
+//       // Render data to the page
+//       checkInventory();
+// });
+    
+    
 
 
 
@@ -60,10 +79,11 @@ const getData = function(event){
   let ProductName = $('#inputProductId').val().trim();
   let Quantity = parseInt($('#inputQuantity').val().trim());
 
-  //log collected uer data
+  //log collected user data
   console.log(`Product Id: ${Product}`);
   console.log(`Product Name: ${ProductName}`);
   console.log(`Quantity: ${Quantity}`);
+  console.log(`Product: ${productList}`);
 
 
 // Validating user input field values.  A Product must be chosen, and a valid number greater than 0 is required.
@@ -74,24 +94,25 @@ else
   isValid = false;
 
 
+// If data is valid process the order
 if (isValid === true){  
-  // temprority call Model to show user data captured
+  
   const displayModal = function(data) {
     
-    // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+    // Grab the result from the AJAX post so the Product Name and Quantity are displayed.
     $('#product_name').text(`Prodcut Name: ${ProductName}`);
     $('#order_quantity').text(`Order Quantity: ${Quantity}`);
 
-    // Show the modal with the best match
+    // Show the modal
     $('#modal_response').modal('toggle');
   }
 
   displayModal();
 
+  
   } else {
     // Display an error alert if the form is not valid, and a correct needs to be made.
     alert(`You have not chosen a Product or have entered an invalid Quantity!  Please correct and then click the "Add to Cart" button.`)
-
   }
 }
 
@@ -102,22 +123,23 @@ $('#submit').on('click', getData);
 
 
 // *****************************************************************************************************
-// *** Need code for processing order logic... total cost, update inventory, and then call rederlist ***
+// *** Need code for processing order logic... valid inventory, total cost, update inventory, update Model and then call rederlist ***
 // *****************************************************************************************************
 
 
-// // Once the customer has placed the order, application checks if there is enough of the product in inventory to meet the customer's request.
-// // If not, the app notifies the customer, and then prevents the order from going through.
-// // However, if store does have enough of the product, the customer's order is fulfilled.
+// Once the customer has placed the order, application checks if there is enough of the product in inventory to meet the customer's request.
+// If not, the app notifies the customer, and then prevents the order from going through.
+// However, if store does have enough of the product, the customer's order is fulfilled.
 
 // function checkInventory(order) {
 //   var query = "SELECT * FROM products WHERE ?";
-//   connection.query(query, { item_id: order.item_id }, function(err, res) {
+//   connection.query(query, { id: order.id }, function(err, res) {
 //       console.log(res);
 //       if (err) throw err;
 //       //
 //       // Check if there is enough in stock and notify customer if there is insufficient inventory.
-//       if (order.quantity > res[0].stock_quantity) {
+//       // order.quantity replaced with user unput order fielname.
+//       if (Quantity > res[0].stock_quantity) {
 //           console.log(`\n********************************************************************************\n`);
 //           console.log(`  Sorry, your oder cannot be completed!  There are only ${res[0].stock_quantity} ${res[0].product_name}'s in stock.\n`);
 //           console.log(`  Please update order within availalbe inventory or select another product.`);
@@ -132,7 +154,8 @@ $('#submit').on('click', getData);
 //           order.newStockQuantity = res[0].stock_quantity - order.quantity;
 //           order.orderCost = res[0].price * order.quantity;
 //           order.product_sales = res[0].product_sales + order.orderCost;
-//           updateInventory(order);
+
+//           // updateInventory(order);
 //       }
 //   });
 // }
@@ -160,7 +183,6 @@ $('#submit').on('click', getData);
 //                       getInventory();
 //                   });
 // }
-
 
 // *******************************************
 // *** Need code for finall update in modal  ***
