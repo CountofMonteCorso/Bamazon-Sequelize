@@ -67,8 +67,7 @@ const getData = function(event){
 
 // Validating user input field values
   let isValid = true;
-if (Quantity === parseInt(Quantity, 10) && Product === parseInt(Product, 10))
-// if (Product === parseInt(Product, 10))
+if (Quantity === parseInt(Quantity, 10) && Quantity > 0 && Product === parseInt(Product, 10))
   isValid = true;
 else
   isValid = false;
