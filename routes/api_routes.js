@@ -33,7 +33,44 @@ module.exports = function (app) {
     });
   });
 
+    // GET Request
+    // Responds with all the current product infromation for a single Product, by id.
+  app.get('/api/products/:id', function(req, res){
+    console.log(req.params);
+    db.Products.findAll({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbProduct){
+      res.json(dbProduct);
+    }).catch(function(error){
+      res.json(error);
+    })
+  })
 
+
+
+  // PUT Request
+  // Update Product table with the new inventory Quantity.
+  app.put('/api/shops/', function(req, res){
+    console.log(req.body);
+    // console.log(req.params.body);
+    db.Products
+    .update(req.body, {
+        where: {
+          id: req.params.id
+        }
+    })
+    .then(function(dbProduct){
+        res.json(dbProduct);
+    })
+    .catch(function(err){
+        console.log(err);
+        console.log('there was an error updating database');
+    })
+  })
+
+  
   // Get route for retrieving a single Product
   // app.get('/api/products/:id', function (req, res) {
   //   // Here we add an 'include' property to our options in our findOne query
@@ -47,8 +84,6 @@ module.exports = function (app) {
   //     res.json({ error: error });
   //   });
   // });
-
-
 
   //  Something similar to this is needed to update the Product list with the new Quantity
 

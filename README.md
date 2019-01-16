@@ -32,7 +32,7 @@ The app will process your order if there is enough product inventory, and provid
 
  If there is insufficient product inventory, customer will be notified that the order cannot be processed.  
    
-   <!-- [Example: Order Unable to Process. Insufficient inventory](Screen_caps/OutOfStock.GIF) -->
+   [Example: Order Unable to Process. Insufficient inventory](Screen_caps/outOfStock.GIF)
 
 _______________________________________________________________________________________________________
 

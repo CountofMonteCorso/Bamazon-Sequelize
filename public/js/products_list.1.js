@@ -93,19 +93,34 @@ const getData = function(event){
   let ProductName = $('#inputProductId').val().trim();
   let Quantity = parseInt($('#inputQuantity').val().trim());
 
-  //log collected user data to sonsole
+  //log collected user data
   console.log(`User selected Product Id: ${Product}`);
   console.log(`User selected Product Name: ${ProductName}`);
   console.log(`User selected Quantity: ${Quantity}`);
+  // console.log(`Product: ${productList}`);
+  
  
-  
-  
-
   // find user selected product by id get request
   // you will use the let product (is actual product id.)
   // then pull in the item data from database and set to value of a variable.
+  // then use said variable to compare (for check inventory logic)
+
+
+              //Can delete if this api call can stay outside of this function
+              // const getById = function(Product) {
+              //   // get one from the database with the id.
+              //   $.ajax({
+              //     url: `/api/products/${Product}`,
+              //     method: "GET"
+              //   }).then(function(productCheck) {
+              //     console.log('Return from Product ID API call: ', productCheck);
+              //     console.log(productCheck.department_name);
+              //   })
+              // }
+
+
   const getById = function(Product) {
-    // get one Product from the table with the id.
+    // get one from the database with the id.
     $.ajax({
       url: `/api/products/${Product}`,
       method: "GET"
@@ -119,7 +134,7 @@ const getData = function(event){
   }
 
 
-  
+
   
 // Validating user input field values.  A Product must be chosen, and a valid number greater than 0 is required.
   let isValid = true;
@@ -135,9 +150,9 @@ if (isValid === true){
   const displayModal = function(data) {
     
     // Grab the order results for Product Name and Quantity and display them.
-    // $('#product_name').text(`Prodcut Name: ${ProductName}`);
-    // $('#order_quantity').text(`Order Quantity: ${Quantity}`);
-   
+    $('#product_name').text(`Prodcut Name: ${ProductName}`);
+    $('#order_quantity').text(`Order Quantity: ${Quantity}`);
+    $('#order_cost').text(`Order Total: ${totalCost}`);
 
     // Show the modal
     $('#modal_response').modal('toggle');
@@ -156,30 +171,31 @@ if (isValid === true){
   }
 
 
+
+
+
   function checkInventory(order) {
-      // Logging the product record returned from the getById request
+    // Logging the product record returned from the getById request
      console.log(order);
    
-     // Check available stock and notify customer if there is insufficient inventory.
-     // order.quantity replaced with user unput order fielname.
+   // Check available stock and notify customer if there is insufficient inventory.
+   // order.quantity replaced with user unput order fielname.
      if (Quantity > order[0].stock_quantity) {
-       console.log(`\n Order cannot be completed!  There are only ${order[0].stock_quantity} ${order[0].product_name}'s in stock.\n`);
-       $('#product_name').text(`Sorry, your oder cannot be completed!  There are only ${order[0].stock_quantity} ${order[0].product_name}'s in stock.`);
-       $('#order_quantity').text('********************************');
-       $('#order_cost').text('Please update your order and try again.');
-       
-       
+       console.log(`\n********************************************************************************\n`);
+       console.log(`  Sorry, your oder cannot be completed!  There are only ${order[0].stock_quantity} ${order[0].product_name}'s in stock.\n`);
+       console.log(`  Please update order within availalbe inventory or select another product.`);
+       console.log(`\n********************************************************************************\n`);
+ 
+     
+   //           getInventory();
    
      // If inventory exists, update the database with the new product quantity and show the customer the total cost of their purchase.
      // Total Cost of Purchase = price of the procuct * quantity purchased.
      } else {
-         console.log(`\n  Processing order... \n`);
-         let totalCost = parseFloat((Quantity * order[0].price)).toFixed(2);
+         console.log(`\n`);
+         console.log(`  Processing your order...`);
+         let totalCost = (Quantity * order[0].price);
          console.log(totalCost);
-         console.log(ProductName);
-         $('#product_name').text(`Prodcut Name: ${ProductName}`);
-         $('#order_quantity').text(`Order Quantity: ${Quantity}`);
-         $('#order_cost').text(`Order Total: $${totalCost}`);
          
          // order.newStockQuantity = res[0].stock_quantity - order.quantity;
          // order.orderCost = res[0].price * order.quantity;
@@ -190,7 +206,8 @@ if (isValid === true){
    //   });
    }
    
-  
+ 
+ 
   getById(Product);
   console.log(Product);
   // console.log(`!!!!!!!!!!!`, Product.department_name);
@@ -198,19 +215,55 @@ if (isValid === true){
   // console.log(output);
   // returnedID = 
 
+
+
 }
 
 
 
 $('#submit').on('click', getData);
-// $('#order').on('click', updateInventory);
-
+$('#order').on('click', updateInventory);
 
 
 
 // *****************************************************************************************************
-// *** Need code for processing order logic...  update inventory, update Model and then call rederlist ***
+// *** Need code for processing order logic... valid inventory, total cost, update inventory, update Model and then call rederlist ***
 // *****************************************************************************************************
+
+
+// Once the customer has placed the order, application checks if there is enough of the product in inventory to meet the customer's request.
+// If not, the app notifies the customer, and then prevents the order from going through.
+// However, if store does have enough of the product, the customer's order is fulfilled.
+
+// function checkInventory(order) {
+//   var output = (order[0].stock_quantity);
+//   console.log(output);
+//   console.log(Quantity);
+
+//   // Check if there is not enough in stock and notify customer if there is insufficient inventory.
+//   // order.quantity replaced with user unput order fielname.
+//   if (Quantity > order[0].stock_quantity) {
+//     console.log(`\n********************************************************************************\n`);
+//     console.log(`  Sorry, your oder cannot be completed!  There are only ${order[0].stock_quantity} ${order[0].product_name}'s in stock.\n`);
+//     console.log(`  Please update order within availalbe inventory or select another product.`);
+//     console.log(`\n********************************************************************************\n`);
+
+//   }
+// //           getInventory();
+
+// //       // If inventory exists, update the database with the new product quantity and show the customer the total cost of their purchase.
+// //       // Total Cost of Purchase = price of the procuct * quantity purchased.
+// //       } else {
+// //           console.log(`\n`);
+// //           console.log(`  Processing your order...`);
+// //           order.newStockQuantity = res[0].stock_quantity - order.quantity;
+// //           order.orderCost = res[0].price * order.quantity;
+// //           order.product_sales = res[0].product_sales + order.orderCost;
+
+// //           // updateInventory(order);
+// //       }
+// //   });
+// }
 
 // // Update the inventory information after sales
 
@@ -235,4 +288,8 @@ $('#submit').on('click', getData);
 //                       render();
 //                   });
 // }
+
+// *******************************************
+// *** Need code for finall update in modal  ***
+// *******************************************
 
