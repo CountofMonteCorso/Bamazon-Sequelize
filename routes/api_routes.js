@@ -51,7 +51,7 @@ module.exports = function (app) {
 
 
   // PUT Request
-  // Update Product table with the new inventory Quantity.
+  // Replaces the Product information at the referenced id with the one provided
   app.put('/api/shops/', function(req, res){
     console.log(req.body);
     // console.log(req.params.body);

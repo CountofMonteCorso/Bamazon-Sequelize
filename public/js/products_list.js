@@ -52,36 +52,7 @@ $(function() {
   
 });
 
-
-
-// const getById = function(Product) {
-//   // get one from the database with the id.
-//   $.ajax({
-//     url: `/api/products/${Product}`,
-//     method: "GET"
-//   }).then(function(productCheck) {
-//     console.log(productCheck);
-//     console.log(productCheck[0].product_name);
-//   })
-// }
-
-
-                                      //       const runListQuery = function () {
-
-                                      //         // The AJAX function uses the URL of API to GET the associated data  
-                                      //         $.ajax({ url: "/api/products", method: "GET" })
-                                      //           .then(function(productList) {
-                                      //             renderList('#productList', productList);
-                                      //             // renderSelect('#inputProductName', inputProductName);
-                                      //           });
-                                      //       }
-                                          
-                                      //   }
-                                      //       // Render data to the page
-                                      //       checkInventory();
-                                      // });
-                                          
-                                          
+                                         
 
 
 // Gathing user input from select boxes
@@ -110,6 +81,24 @@ const getData = function(event){
       url: `/api/products/${Product}`,
       method: "GET"
     }).then(function(productCheck) {
+    
+    // console.log(productCheck);
+    // console.log(productCheck[0].product_name);
+    // console.log(output);
+      checkInventory(productCheck);
+    })
+  }
+
+
+// taking the product ID (${Product}) and passing it to the update/PUT route in order to update
+// the (stock_quantity:) of the ordered product.
+  const updateInventory = function(Product) {
+    // update Product quantity in the table using the id.
+    $.ajax({
+      url: `/api/products/${Product}`,
+      method: "PUT"
+    }).then(function(productCheck) {
+      console.log(`Update Inventory:, ${updateInventory}`);
       // const output = (productCheck[0].product_name);
       // // console.log(productCheck);
       // // console.log(productCheck[0].product_name);
@@ -119,7 +108,26 @@ const getData = function(event){
   }
 
 
+                        
+                      // function updateInventory(i) {
+                      //   if (i >= 0) {
+
+                      //       $.ajax({
+                      //           method: 'PUT',
+                      //           url: `/api/products/${inCartItems[i].id}`,
+                      //           data: inCartItems[i]
+                      //       }).then(function (data) {
+                      //           index = index - 1;
+                      //           updateItem(index);
+                      //       });
+                      //   }
+                        
+                      //   render();
+                      // }
+
+
   
+
   
 // Validating user input field values.  A Product must be chosen, and a valid number greater than 0 is required.
   let isValid = true;
@@ -133,12 +141,10 @@ else
 // If data is valid process the order
 if (isValid === true){  
   const displayModal = function(data) {
-    
     // Grab the order results for Product Name and Quantity and display them.
     // $('#product_name').text(`Prodcut Name: ${ProductName}`);
     // $('#order_quantity').text(`Order Quantity: ${Quantity}`);
    
-
     // Show the modal
     $('#modal_response').modal('toggle');
   }
@@ -165,7 +171,7 @@ if (isValid === true){
      if (Quantity > order[0].stock_quantity) {
        console.log(`\n Order cannot be completed!  There are only ${order[0].stock_quantity} ${order[0].product_name}'s in stock.\n`);
        $('#product_name').text(`Sorry, your oder cannot be completed!  There are only ${order[0].stock_quantity} ${order[0].product_name}'s in stock.`);
-       $('#order_quantity').text('********************************');
+       $('#order_quantity').text('');
        $('#order_cost').text('Please update your order and try again.');
        
        
@@ -181,13 +187,14 @@ if (isValid === true){
          $('#order_quantity').text(`Order Quantity: ${Quantity}`);
          $('#order_cost').text(`Order Total: $${totalCost}`);
          
-         // order.newStockQuantity = res[0].stock_quantity - order.quantity;
-         // order.orderCost = res[0].price * order.quantity;
-         // order.product_sales = res[0].product_sales + order.orderCost;
- 
+         order.newStockQuantity = order[0].stock_quantity - Quantity;
+         console.log(order.newStockQuantity);
+        //  order.orderCost = res[0].price * order.quantity;
+         order.product_sales = order[0].product_sales + totalCost;
+         console.log(order.product_sales);
          // updateInventory(order);
      }
-   //   });
+  
    }
    
   
@@ -204,6 +211,42 @@ if (isValid === true){
 
 $('#submit').on('click', getData);
 // $('#order').on('click', updateInventory);
+
+
+
+
+
+
+
+
+
+
+ // PUT Request
+  // Replaces the reservation at the referenced id with the one provided
+  // Responds with success: true or false if successful
+  // app.put('/api/products/:id', function(req, res) {
+  //   db.Reservation.update(
+  //     req.body,
+  //     { where: { id: req.params.id } }
+  //   ).then(function() {
+  //     res.json({ success: true });
+  //   }).catch(function(error) {
+  //     res.json({ error: error });
+  //   });
+  // });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
