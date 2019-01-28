@@ -52,7 +52,7 @@ module.exports = function (app) {
 
   // PUT Request
   // Replaces the Product information at the referenced id with the one provided
-  app.put('/api/shops/', function(req, res){
+  app.put('/api/products/:id', function(req, res){
     console.log(req.body);
     // console.log(req.params.body);
     db.Products
@@ -62,7 +62,9 @@ module.exports = function (app) {
         }
     })
     .then(function(dbProduct){
-        res.json(dbProduct);
+        console.log(`dbProduct: ${dbProduct}`);
+        console.log(req.params.id);
+        res.json({data: dbProduct});
     })
     .catch(function(err){
         console.log(err);
