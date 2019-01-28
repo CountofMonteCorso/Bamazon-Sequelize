@@ -218,10 +218,10 @@ $(function () {
       // Render data to the page
        render();
        // Show the modal
-       $('#modal_thanks').modal('toggle');
+      //  $('#modal_thanks').modal('toggle');
       
       
-       // const output = (productCheck[0].product_name);
+      // const output = (productCheck[0].product_name);
       // console.log(productCheck);
       // console.log(productCheck[0].product_name);
       // console.log(output);
