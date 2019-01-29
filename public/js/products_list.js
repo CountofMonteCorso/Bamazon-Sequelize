@@ -6,6 +6,7 @@ $(function () {
 
   let Product = 0;
   let newStockQuantity = 0;
+  let availalbe_Inventory = false;
   // use this object to build the row of updated data being passed to the put function to update inventory
   let test = {};
 
@@ -163,7 +164,7 @@ $(function () {
         $('#product_name').text(`Sorry, your oder cannot be completed!  There are only ${order[0].stock_quantity} ${order[0].product_name}'s in stock.`);
         $('#order_quantity').text('');
         $('#order_cost').text('Please update your order and try again.');
-
+        availalbe_Inventory = false;
 
 
         // If inventory exists, update the database with the new product quantity and show the customer the total cost of their purchase.
@@ -179,10 +180,12 @@ $(function () {
 
         order.newStockQuantity = order[0].stock_quantity - Quantity;
         newStockQuantity = order[0].stock_quantity - Quantity;
-        console.log(order.newStockQuantity);
+        console.log(`new stock quantity, inside checkInventory: ${order.newStockQuantity}`);
         //  order.orderCost = res[0].price * order.quantity;
         order.product_sales = order[0].product_sales + totalCost;
-        console.log(order.product_sales);
+        console.log(`total cost, inside checkInventory: ${order.product_sales}`);
+
+        availalbe_Inventory = true;
         // updateInventory(order);
       }
 
@@ -196,7 +199,7 @@ $(function () {
     // returnedID = 
 
     return Product;
-      
+
   }
 
   // taking the product ID (${Product}) and passing it to the update/PUT route in order to update
@@ -208,19 +211,26 @@ $(function () {
     console.log(newStockQuantity);
     $.ajax({
       url: `/api/products/${Product}`,
-      method: "PUT", 
+      method: "PUT",
       data: newStockQuantity
       // newStockQuantity should become "test" or whatever I call the new object containing updated row data
       // https://stackoverflow.com/questions/13056810/how-to-implement-a-put-call-with-json-data-using-ajax-and-jquery/13056984
-    }).then(function(data) {
+    }).then(function (data) {
       console.log(`Update Inventory:, ${Product}`);
-     
-      // Render data to the page
-       render();
-       // Show the modal
-      //  $('#modal_thanks').modal('toggle');
-      
-      
+
+
+      // Render data to the page!!!!!!!!!!!!!!!!  Need to renable after code work to update inventory.
+      // render();
+
+
+      // If Quantity < order[0].stock_quantity
+      if (availalbe_Inventory === true) {
+        $('#modal_thanks').modal('toggle');
+        console.log(availalbe_Inventory);
+        availalbe_Inventory = false;
+        console.log(availalbe_Inventory);
+      }
+
       // const output = (productCheck[0].product_name);
       // console.log(productCheck);
       // console.log(productCheck[0].product_name);
@@ -241,69 +251,4 @@ $(function () {
 
 
 
-
-
-
-
-
-
-
-
- // PUT Request
-  // Replaces the reservation at the referenced id with the one provided
-  // Responds with success: true or false if successful
-  // app.put('/api/products/:id', function(req, res) {
-  //   db.Reservation.update(
-  //     req.body,
-  //     { where: { id: req.params.id } }
-  //   ).then(function() {
-  //     res.json({ success: true });
-  //   }).catch(function(error) {
-  //     res.json({ error: error });
-  //   });
-  // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// *****************************************************************************************************
-// *** Need code for processing order logic...  update inventory, update Model and then call rederlist ***
-// *****************************************************************************************************
-
-// // Update the inventory information after sales
-
-// function updateInventory(product) {
-//   var query = "UPDATE products SET ? WHERE ?";
-//   connection.query(query,
-//                   [{
-//                       stock_quantity: product.newStockQuantity,
-//                       product_sales: product.product_sales,
-//                   },
-//                   {
-//                        item_id: product.item_id
-//                   }],
-//                   function(err, res) {
-//                       if (err) throw err;
-//                       //console.log(res.affectedRows);
-//                       console.log(`\n**********************************************\n`);
-//                       console.log(`  Order Processed: Your total cost is \$${product.orderCost}`);
-//                       console.log(`  Transaction completed! Thank you.`);
-//                       console.log(`\n**********************************************\n`);
-
-//                       render();
-//                   });
-// }
 
