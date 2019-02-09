@@ -174,9 +174,10 @@ $(function () {
         let totalCost = parseFloat((Quantity * order[0].price)).toFixed(2);
         console.log(totalCost);
         console.log(ProductName);
-        $('#product_name').text(`Prodcut Name: ${ProductName}`);
-        $('#order_quantity').text(`Order Quantity: ${Quantity}`);
-        $('#order_cost').text(`Order Total: $${totalCost}`);
+        // $('#product_name').text(`Prodcut Name: ${ProductName}`);
+        // $('#order_quantity').text(`Order Quantity: ${Quantity}`);
+        // $('#order_cost').text(`Order Total: $${totalCost}`);
+        setNameQuanityCostToDom(ProductName, Quantity, totalCost)
 
         order.newStockQuantity = order[0].stock_quantity - Quantity;
         newStockQuantity = order[0].stock_quantity - Quantity;
@@ -185,7 +186,7 @@ $(function () {
         order.product_sales = order[0].product_sales + totalCost;
         console.log(`total cost, inside checkInventory: ${order.product_sales}`);
 
-        availalbe_Inventory = true;
+        available_Inventory = true;
         // updateInventory(order);
       }
 
