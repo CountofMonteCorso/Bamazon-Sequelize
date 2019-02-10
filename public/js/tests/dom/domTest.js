@@ -1,3 +1,4 @@
+// Functional Tests
 describe('setNameQuanityCostToDom', function() {
 
     it('should populate name, quantity and cost divs', function() {

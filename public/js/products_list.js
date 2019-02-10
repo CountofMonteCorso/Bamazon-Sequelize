@@ -3,7 +3,6 @@ $(function () {
   // jQuery used to "download" the data from our product table
   // then dynamically display this content 
 
-
   let Product = 0;
   let newStockQuantity = 0;
   let availalbe_Inventory = false;
@@ -54,11 +53,8 @@ $(function () {
       });
   }
 
-  // Render data to the page
+  // Render data to the product list page
   render();
-
-
-
 
 
 
@@ -194,13 +190,7 @@ $(function () {
 
     getById(Product);
     console.log(`Product ${Product}`);
-    // console.log(`!!!!!!!!!!!`, Product.department_name);
-    // const output = $(Product.department_name);
-    // console.log(output);
-    // returnedID = 
-
     return Product;
-
   }
 
   // taking the product ID (${Product}) and passing it to the update/PUT route in order to update
@@ -239,8 +229,6 @@ $(function () {
       // checkInventory(productCheck);
     })
   }
-
-
 
 
   $('#submit').on('click', getData);

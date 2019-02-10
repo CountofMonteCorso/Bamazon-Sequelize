@@ -15,7 +15,7 @@ const db = require('../models');
 // ROUTING
 // ===============================================================================
 
-module.exports = function (app) {
+module.exports = function(app) {
 
   // API Requests for /api/products
   // Below code controls what happens when a request is made to /api/products
@@ -47,6 +47,18 @@ module.exports = function (app) {
       res.json(error);
     })
   })
+
+
+
+   // PUT Request
+   // Replaces the Product information
+  app.post('/api/products', function(req, res) {
+    db.User.create(req.body)
+    .then(function(rows) {
+      res.json(rows);
+    })
+  })
+
 
 
 

@@ -37,5 +37,6 @@ app.listen(PORT, function() {
   });
 });
 
-
+//exports express instance and used by apiTest file for route testing. 
+module.exports = app;
 
