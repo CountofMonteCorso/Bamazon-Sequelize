@@ -50,10 +50,10 @@ module.exports = function(app) {
 
 
 
-   // PUT Request
+   // Post Request
    // Replaces the Product information
   app.post('/api/products', function(req, res) {
-    db.User.create(req.body)
+    db.Products.create(req.body)
     .then(function(rows) {
       res.json(rows);
     })

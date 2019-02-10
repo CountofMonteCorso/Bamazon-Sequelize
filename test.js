@@ -12,7 +12,7 @@ let request;
 
 describe('GET /api/products', function () {
   // Before each test begins, create a new request server for testing
-  // & delete all examples from the db
+  // & delete all products from the db
   beforeEach(function () {
     request = chai.request(server);
     return db.sequelize.sync({ force: true });
@@ -31,8 +31,6 @@ describe('GET /api/products', function () {
       request.get('/api/products').end(function (err, res) {
         let responseStatus = res.status;
         let responseBody = res.body;
-        // console.log(responseStatus);
-        // console.log(responseBody);
 
         // Run assertions on the response
         expect(err).to.be.null;
@@ -69,11 +67,11 @@ describe('POST /api/products', function () {
 
   it('should save a new product', function (done) {
     var reqBody = {
-      product_name: 'Couch',
-      department_name: 'Furniture',
-      price: '1899.00',
-      stock_quantity: '16',
-      product_sales: '0.00'
+      product_name: "Couch",
+      department_name: "Furniture",
+      price: 1899.00,
+      stock_quantity : 16,
+      product_sales: 0.00
     };
     console.log(reqBody);
 
@@ -81,18 +79,16 @@ describe('POST /api/products', function () {
     request
       .post('/api/products')
       .send(reqBody)
-      // .set('Content-Type', 'application/json')
-      // .set('Accept', 'application/json')
       .end(function (err, res) {
         var responseStatus = res.status;
         var responseBody = res.body;
-
+        console.log(`Response Status: ${responseStatus}`);
+        
         // Run assertions on the response
         expect(err).to.be.null;
 
         expect(responseStatus).to.equal(200);
-        console.log(`Response Status: ${responseStatus}`);
-
+        
         expect(responseBody)
           .to.be.an('object')
           .that.includes(reqBody);
