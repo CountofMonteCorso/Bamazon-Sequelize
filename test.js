@@ -37,6 +37,8 @@ describe('GET /api/products', function () {
 
         expect(responseStatus).to.equal(200);
 
+        expect(responseBody).to.not.be.null;
+
         expect(responseBody)
           .to.be.an('array')
           .that.has.lengthOf(4);
@@ -49,6 +51,12 @@ describe('GET /api/products', function () {
           .to.be.an('object')
           .that.includes({ product_name: 'Battery', department_name: 'Automotive', price: '150.00', stock_quantity: 20 });
 
+        for (let i = 0; i < responseBody.length; i++) {
+          expect(responseBody[i])
+          .to.be.an('object')
+          .that.does.not.includes({ product_name: 'TV', department_name: 'Electronics', price: '650.00', stock_quantity: 0 });
+        }  
+       
         // The `done` function is used to end any asynchronous tests
         done();
       });
@@ -88,10 +96,16 @@ describe('POST /api/products', function () {
         expect(err).to.be.null;
 
         expect(responseStatus).to.equal(200);
+
+        expect(responseStatus).to.not.equal(400);
+
+        expect(responseBody).to.not.be.null;
         
         expect(responseBody)
           .to.be.an('object')
           .that.includes(reqBody);
+
+        expect(responseBody).to.be.instanceof(Object);
 
         // The `done` function is used to end any asynchronous tests
         done();
